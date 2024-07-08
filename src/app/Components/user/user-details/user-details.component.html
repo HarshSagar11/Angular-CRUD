@@ -1,1 +1,79 @@
-<p>user-details works!</p>
+<div class="userInputForm">
+    <form [formGroup]="userForm">
+        <div class="flex flex-col sm:flex-row">
+            <div class="mb-2 sm:w-1/3">
+                <label for="id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter id</label>
+                <input type="id" id="id" formControlName="id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Id"/>
+                <small *ngIf="userForm.get('id')?.touched && !userForm.get('id')?.valid" class="text-red-600">Enter valid id</small>
+            </div>
+            <div class="mb-2 sm:ms-3 sm:w-2/3">
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter name</label>
+                <input type="name" id="name" formControlName="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter full name"/>
+                <small *ngIf="userForm.get('name')?.touched && !userForm.get('name')?.valid" class="text-red-600">Enter valid name</small>    
+            </div>
+        </div>
+        <!-- switch -->
+        <div class="flex flex-col sm:flex-row">
+            <div class="flex flex-col">
+                <label class="block text-sm font-medium text-gray-900 dark:text-white">Gender</label>
+                <div class="w-1/4 my-auto"> 
+                    <label class="relative inline-flex cursor-pointer items-center">
+                        <input type="checkbox" id="gender" value="" class="peer sr-only" formControlName="gender"/>
+                        <div
+                          class="peer flex h-8 items-center gap-4 rounded-full bg-orange-600 px-3 after:absolute after:left-1 after: after:h-6 after:w-14  after:rounded-full after:bg-white/40 after:transition-all after:content-[''] peer-checked:bg-stone-600 peer-checked:after:translate-x-full peer-focus:outline-none dark:border-slate-600 dark:bg-slate-700 text-sm text-white"
+                        >
+                          <span class="ms-1">Male</span>
+                          <span class="ms-1 ">Female </span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="mb-2 sm:mx-3 sm:w-2/4" #dateInput> 
+                <label for="dob" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter dob</label>
+                <div class="relative">
+                    <input type="text" readonly formControlName="dob"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Select date" (click)="showDatepicker = !showDatepicker">
+        
+                    <div class="absolute top-0 right-0 px-3 py-2">
+                      <svg class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                </div>
+                <div [hidden]="!showDatepicker" #calendar  class="border mt-2 rounded-lg shadow absolute items-center justify-center" style="width: 17rem">
+                    <div #dateField inline-datepicker datepicker-buttons datepicker-autoselect-today (changeDate)="onDatePicked($event)" class="mx-auto sm:mx-0 bg-primary-100 "> </div>
+                </div>
+            </div>
+            <div class="mb-2 sm:w-1/4"> 
+                <label for="age" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter age</label>
+                <input type="age" id="age" formControlName="age" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter age"/>
+            </div>
+        </div>
+        <div class="mb-2"> 
+            <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter address</label>
+            <textarea type="address" id="address" formControlName="address" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter address"></textarea>
+            <small *ngIf="userForm.get('address')?.touched && !userForm.get('address')?.valid" class="text-red-600">Enter valid address</small>
+        </div>
+        <div class="mb-2"> 
+            <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter country</label>
+            <select id="country" formControlName="country"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            
+                <option value="" selected>Select Country</option>
+                <option value="India">India</option>
+                <option value="United States">United States</option>
+                <option value="Canada">Canada</option>
+                <option value="France">France</option>
+                <option value="Germany">Germany</option>
+            </select>
+            <small *ngIf="userForm.get('country')?.touched && !userForm.get('country')?.valid" class="text-red-600">Enter valid country</small>    
+        </div>
+    </form>
+</div>
+<div class="flex items-center mt-4 ">
+    <button class="text-white disabled:bg-blue-200 disabled:hover:bg-blue-300 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" (click)="saveUser()" [disabled]="!userForm.valid">Save</button>
+    <button class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"(click)="closeModal.emit()">Cancel</button>
+</div>
+

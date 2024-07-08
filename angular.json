@@ -35,9 +35,12 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/flowbite-datepicker/dist/js/datepicker-full.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -94,9 +97,12 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/flowbite-datepicker/dist/js/datepicker-full.min.js"
+            ]
           }
         }
       }
